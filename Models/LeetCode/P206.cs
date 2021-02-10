@@ -1,6 +1,6 @@
-﻿using ConsoleApp.Models.LinkedList;
+﻿using Models.Structures.LinkedList;
 
-namespace ConsoleApp.LeetCode
+namespace Models.LeetCode
 {
 	public class P206
 	{

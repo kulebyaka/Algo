@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace ConsoleApp.Models
+﻿namespace Models.Structures
 {
 	public interface IContainer<T> where T : struct
 	{

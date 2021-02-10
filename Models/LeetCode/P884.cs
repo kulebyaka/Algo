@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ConsoleApp.Models.Tree;
 
-namespace ConsoleApp.LeetCode
+namespace Models.LeetCode
 {
 	public class P884
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ConsoleApp.Models.Tree
+namespace Models.Structures.Tree
 {
 	public class TreeNode<T>:IContainer<T> where T : struct
 	{

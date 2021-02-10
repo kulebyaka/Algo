@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp.Models.LinkedList
+﻿namespace Models.Structures.LinkedList
 {
 	public class ListNode {
 

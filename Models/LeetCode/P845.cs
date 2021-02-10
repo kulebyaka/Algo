@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
 
-namespace ConsoleApp.LeetCode
+namespace Models.LeetCode
 {
 	public class P845
 	{

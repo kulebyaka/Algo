@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp.Models.Tree
+﻿namespace Models.Structures.Tree
 {
 	public class BinaryTreeNode<T>:IContainer<T> where T : struct
 	{

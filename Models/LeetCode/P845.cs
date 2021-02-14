@@ -4,13 +4,7 @@ namespace Models.LeetCode
 {
 	public class P845
 	{
-		public static string Run()
-		{
-			var x = new P845();
-			var ret = x.LongestMountain(new[]{0,1,0,0,1,0,0});
-			return ret.ToString();
-		}
-		public int LongestMountain(int[] arr)
+		public static int LongestMountain(int[] arr)
 		{
 			var maxMountain = 0;
 			var currMountain = 1;

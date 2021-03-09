@@ -1,8 +1,10 @@
 ﻿using System;
+using Models.Attributes;
 using Models.Structures.Tree;
 
 namespace Models.LeetCode
 {
+	[BinaryTreeTag]
 	public class P538
 	{
 		private int _counter = 0;

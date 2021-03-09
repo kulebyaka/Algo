@@ -1,7 +1,9 @@
 ﻿using System;
+using Models.Attributes;
 
 namespace Models.LeetCode
 {
+	[ArrayTag]
 	public class P845
 	{
 		public static int LongestMountain(int[] arr)

@@ -1,7 +1,9 @@
-﻿using Models.Structures.LinkedList;
+﻿using Models.Attributes;
+using Models.Structures.LinkedList;
 
 namespace Models.LeetCode
 {
+	[LinkedListTag]
 	public class P206
 	{
 		public static string Run()

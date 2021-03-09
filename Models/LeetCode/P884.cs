@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Models.Attributes;
 
 namespace Models.LeetCode
 {
+	[StringTag]
 	public class P884
 	{
-		
 		public static string Run()
 		{
 			var ret = P884.UncommonFromSentences("apple apple", "banana");

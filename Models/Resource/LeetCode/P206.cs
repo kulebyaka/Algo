@@ -1,7 +1,7 @@
 ﻿using Models.Attributes;
 using Models.Structures.LinkedList;
 
-namespace Models.LeetCode
+namespace Models.Resource.LeetCode
 {
 	[LinkedListTag]
 	public class P206

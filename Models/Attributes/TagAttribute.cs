@@ -27,5 +27,10 @@ namespace Models.Attributes
 	{
 		
 	}
+
+	public class MathTag : TagAttribute
+	{
+		
+	}
 	
 }

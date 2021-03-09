@@ -1,5 +1,4 @@
-﻿using Models.LeetCode;
-using Models.Structures.Tree;
+﻿using Models.Structures.Tree;
 
 namespace ConsoleApp
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Models.Attributes;
 
-namespace Models.LeetCode
+namespace Models.Resource.LeetCode
 {
 	[ArrayTag]
 	public class P845

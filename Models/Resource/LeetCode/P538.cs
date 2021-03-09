@@ -2,7 +2,7 @@
 using Models.Attributes;
 using Models.Structures.Tree;
 
-namespace Models.LeetCode
+namespace Models.Resource.LeetCode
 {
 	[BinaryTreeTag]
 	public class P538

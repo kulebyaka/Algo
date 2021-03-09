@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Models.LeetCode;
+using Models.Resource.LeetCode;
 using Models.Structures.Tree;
 using NUnit.Framework;
 

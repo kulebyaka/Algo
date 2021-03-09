@@ -2,7 +2,7 @@
 using System.Linq;
 using Models.Attributes;
 
-namespace Models.LeetCode
+namespace Models.Resource.LeetCode
 {
 	[StringTag]
 	public class P884

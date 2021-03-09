@@ -1,5 +1,6 @@
 ﻿using System;
 using Models.Attributes;
+using Models.Structures.Tree;
 
 namespace Models.Resource.Microsoft
 {
@@ -7,10 +8,18 @@ namespace Models.Resource.Microsoft
 	{
 		// From Image
 		[StringTag]
-		public static string Compression(string input)
+		public string Compression(string input)
 		{
 			return "";
 		}
+		
+		// Find nearest common root in binary search tree 
+		[BinaryTreeTag]
+		public int FindCommonRoot(BinaryTreeNode<int> bst, int nodeA, int nodeB)
+		{
+			return nodeA;
+		}
+		
 		// Find the square root of a number without using the sqrt method
 		[MathTag]
 		public double Sqrt(double variable, double epsilon = 0.1)

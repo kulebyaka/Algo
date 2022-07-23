@@ -37,7 +37,7 @@ namespace Tests
 		[Test, TestCaseSource(nameof(solution1Input))]
 		public void solution1(int[] bst, int expectedCommonRoot)
 		{
-			var commonRoot = MicrosoftReal.solution1(bst);
+			var commonRoot = MicrosoftReal.Task2(bst);
 			Assert.AreEqual(commonRoot, expectedCommonRoot);
 		} 
 		private static IEnumerable<TestCaseData> solution1Input()
@@ -50,7 +50,7 @@ namespace Tests
 		[Test, TestCaseSource(nameof(solutionInput))]
 		public void solution(int[] bst, int expectedCommonRoot)
 		{
-			var commonRoot = MicrosoftReal.solution(bst);
+			var commonRoot = MicrosoftReal.Task1(bst);
 			Assert.AreEqual(commonRoot, expectedCommonRoot);
 		}
 		

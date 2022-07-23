@@ -15,7 +15,7 @@ namespace Tests
 		public void SqrtTest(double variable, double eps)
 		{
 			var microsoftTasks = new MicrosoftTasks();
-			double mySqrt = microsoftTasks.Sqrt(variable, eps);
+			double mySqrt = MicrosoftTasks.Sqrt(variable, eps);
 			double actualSqrt = Math.Sqrt(variable);
 			Assert.True(Math.Abs(mySqrt - actualSqrt) < eps);
 		} 
@@ -24,7 +24,7 @@ namespace Tests
 		public void NearestCommonNodeTest(int?[] bst, int a, int b, int expectedCommonRoot)
 		{
 			var microsoftTasks = new MicrosoftTasks();
-			var commonRoot = microsoftTasks.FindCommonRoot(new BinaryTreeNode<int>(bst), a, b);
+			var commonRoot = MicrosoftTasks.FindCommonRoot(new BinaryTreeNode<int>(bst), a, b);
 			Assert.AreEqual(commonRoot, expectedCommonRoot);
 		} 
 		

@@ -4,7 +4,7 @@ using Models.Structures.Tree;
 
 namespace Models.Resource.LeetCode
 {
-	[BinaryTreeTag]
+	[Tag(new[] {Tags.Tree, Tags.Traversal})]
 	public class P538
 	{
 		private int _counter = 0;

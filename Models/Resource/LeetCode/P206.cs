@@ -3,19 +3,20 @@ using Models.Structures.LinkedList;
 
 namespace Models.Resource.LeetCode
 {
-	[LinkedListTag]
+	[Tag(new []{Tags.LinkedList})]
 	public class P206
 	{
 		public static string Run()
 		{
 			int[] input = {1,2,3,4,5};
 			var x = new ListNode(input);
-			var ret = P206.ReverseList(x);
+			ListNode ret = P206.ReverseList(x);
 			return ret.ToString();
 		}
-		public static ListNode ReverseList(ListNode head)
+
+		private static ListNode ReverseList(ListNode head)
 		{
-			var current = head;
+			ListNode current = head;
 			if (current == null)
 				return null;
 			ListNode prev = null;

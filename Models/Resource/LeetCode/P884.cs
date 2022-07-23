@@ -4,7 +4,7 @@ using Models.Attributes;
 
 namespace Models.Resource.LeetCode
 {
-	[StringTag]
+	[Tag( new []{Tags.String})]
 	public class P884
 	{
 		public static string Run()

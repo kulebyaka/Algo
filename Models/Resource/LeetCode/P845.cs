@@ -3,7 +3,7 @@ using Models.Attributes;
 
 namespace Models.Resource.LeetCode
 {
-	[ArrayTag]
+	[Tag(new []{Tags.Array})]
 	public class P845
 	{
 		public static int LongestMountain(int[] arr)

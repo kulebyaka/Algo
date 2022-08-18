@@ -5,8 +5,4 @@
         <LangVersion>default</LangVersion>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Resource" />
-    </ItemGroup>
-
 </Project>

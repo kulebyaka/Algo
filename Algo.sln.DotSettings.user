@@ -2,5 +2,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=de4610a8_002D09ce_002D4be1_002Dbc24_002Dc6ca1466e079/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ArrayTestFixture" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::1BC73695-7DAB-4A90-93AD-5E157AABD8BD::net6.0::Tests.TaskDelayTestFixture.TestMyAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1BC73695-7DAB-4A90-93AD-5E157AABD8BD::net6.0::Tests.YouTubeTestFixtures.FindSplitPointTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1BC73695-7DAB-4A90-93AD-5E157AABD8BD::net6.0::Tests.YouTubeTestFixtures&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

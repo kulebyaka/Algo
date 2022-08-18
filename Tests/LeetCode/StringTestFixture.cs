@@ -9,7 +9,7 @@ namespace Tests.LeetCode;
 //TestFixture for P22
 [TestFixture]
 [Parallelizable(ParallelScope.All)]
-public class P22TestFixture
+public class StringTestFixture
 {
 	[Test]
 	[TestCase(3, new[] { "((()))", "(()())", "(())()", "()(())", "()()()" }),

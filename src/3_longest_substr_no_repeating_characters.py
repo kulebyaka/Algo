@@ -6,11 +6,9 @@ substring
 without repeating characters.
 """
 
-class Solution:
+class Solution1:
     def areCharactersUnique(self, s:str):
 
-        # An integer to store presence/absence
-        # of 26 characters using its 32 bits
         checker = 0
 
         print("check " + s)
@@ -38,8 +36,30 @@ class Solution:
 
         return max_res
 
+class Solution2:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        # HashSet to store unique characters
+        unique_chars = set()
+        max_length = 0
+        left = 0  # Left pointer of the sliding window
+
+        # Move right pointer to expand the window
+        for right in range(len(s)):
+            # If character is already in the set, shrink the window from the left
+            while s[right] in unique_chars:
+                unique_chars.remove(s[left])
+                left += 1
+
+            # Add the current character to the set
+            unique_chars.add(s[right])
+            # Update max_length
+            max_length = max(max_length, right - left + 1)
+
+        return max_length
+
 def main():
-    print(Solution().lengthOfLongestSubstring("abcabcbb"))
+    print(Solution1().lengthOfLongestSubstring("abcadkcbb"))
+    print(Solution2().lengthOfLongestSubstring("abcadkcbb"))
 
 if __name__ == "__main__":
     main()

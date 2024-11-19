@@ -6,6 +6,7 @@ anagrams
 together.
 You can return the answer in any order.
 """
+from collections import defaultdict
 from typing import List
 
 
@@ -35,9 +36,25 @@ class Solution:
         return res
 
 
+class Solution1:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        anagrams = defaultdict(list)
+
+        for word in strs:
+            # Create a frequency count of characters (26 slots for 'a' to 'z')
+            char_count = [0] * 26
+            for char in word:
+                char_count[ord(char) - ord('a')] += 1
+            # Use the tuple version of the count as the key
+            key = tuple(char_count)
+            anagrams[key].append(word)
+
+        # Return the grouped anagrams as a list of lists
+        return list(anagrams.values())
+
 
 def main():
-    print(Solution().groupAnagrams(["eat","tea","tan","ate","nat","bat"]))
+    print(Solution1().groupAnagrams(["eat","tea","tan","ate","nat","bat"]))
 
 if __name__ == "__main__":
     main()

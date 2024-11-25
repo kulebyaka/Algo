@@ -34,6 +34,8 @@ class Solution:
         return self.rec(digits, pos+1, new_arrays)
 
     def letterCombinations(self, digits: str) -> List[str]:
+        if digits == "":
+            return []
         res = [""]
         return self.rec(digits, 0, res)
 

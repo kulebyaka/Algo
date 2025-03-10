@@ -1,5 +1,5 @@
 import pytest
-from src._33_search_in_rotated_sorted_array import Solution
+from py._33_search_in_rotated_sorted_array import Solution
 
 class TestRotatedSearch:
     @pytest.mark.parametrize(

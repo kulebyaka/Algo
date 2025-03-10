@@ -3,20 +3,20 @@ import os
 import sys
 from typing import List, Callable, Any, Dict, Tuple
 
-# Add the src directory to the path
+# Add the py directory to the path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Import solutions
-from src._146_LRU_cache import LRUCache
-from src._151_reverse_words_in_a_string import Solution as ReverseWordsSolution
-from src._15_three_sum import Solution2 as ThreeSumSolution
-from src._17_letter_combinations_of_a_phone_number import Solution as LetterCombinationsSolution
-from src._1822_array_product_sign import Solution as ArraySignSolution
-from src._200_islands_number import Solution as IslandsSolution
-from src._33_search_in_rotated_sorted_array import Solution as RotatedSearchSolution
-from src._3_longest_substr_no_repeating_characters import Solution2 as LongestSubstringSolution
-from src._49_group_anagrams import Solution1 as GroupAnagramsSolution
-from src._54_spiral_matrix import Solution54 as SpiralMatrixSolution
+from py._146_LRU_cache import LRUCache
+from py._151_reverse_words_in_a_string import Solution as ReverseWordsSolution
+from py._15_three_sum import Solution2 as ThreeSumSolution
+from py._17_letter_combinations_of_a_phone_number import Solution as LetterCombinationsSolution
+from py._1822_array_product_sign import Solution as ArraySignSolution
+from py._200_islands_number import Solution as IslandsSolution
+from py._33_search_in_rotated_sorted_array import Solution as RotatedSearchSolution
+from py._3_longest_substr_no_repeating_characters import Solution2 as LongestSubstringSolution
+from py._49_group_anagrams import Solution1 as GroupAnagramsSolution
+from py._54_spiral_matrix import Solution54 as SpiralMatrixSolution
 
 
 # Tests for LRU Cache

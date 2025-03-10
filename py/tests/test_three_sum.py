@@ -1,5 +1,5 @@
 import pytest
-from src._15_three_sum import Solution2
+from py._15_three_sum import Solution2
 
 class TestThreeSum:
     @pytest.mark.parametrize(

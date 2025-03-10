@@ -1,6 +1,6 @@
 import pytest
 import copy
-from src._200_islands_number import Solution
+from py._200_islands_number import Solution
 
 class TestNumberOfIslands:
     @pytest.mark.parametrize(

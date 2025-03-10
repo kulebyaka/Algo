@@ -1,0 +1,121 @@
+name: Algorithm Performance Benchmarks
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  # Allow manual triggering
+  workflow_dispatch:
+  # Run weekly to track long-term changes
+  schedule:
+    - cron: '0 0 * * 0'  # Run at midnight on Sunday
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # Fetch all history for all branches and tags
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -e .
+        
+    - name: Run benchmarks
+      run: |
+        mkdir -p benchmark-results
+        python -m benchmarks.benchmark_algorithms all
+        mv *.png benchmark-results/ 2>/dev/null || true
+        
+    - name: Upload benchmark results
+      uses: actions/upload-artifact@v3
+      with:
+        name: benchmark-results
+        path: benchmark-results/
+        
+    - name: Store benchmark result
+      uses: benchmark-action/github-action-benchmark@v1
+      with:
+        name: Algorithm Performance Benchmarks
+        tool: 'customBiggerIsBetter'
+        output-file-path: benchmark-results/benchmark_summary.json
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        auto-push: true
+        # Alert threshold:
+        alert-threshold: '150%'
+        comment-on-alert: true
+        fail-on-alert: true
+        # GitHub pages branch to store benchmark results
+        gh-pages-branch: gh-pages
+        
+    - name: Check for performance regression
+      id: check-regression
+      run: |
+        if [ -f benchmark-results/regression_detected.txt ]; then
+          echo "regression=true" >> $GITHUB_OUTPUT
+          echo "::warning::Performance regression detected!"
+        else
+          echo "regression=false" >> $GITHUB_OUTPUT
+        fi
+        
+    # Send email notification if regression is detected  
+    - name: Send email notification
+      if: steps.check-regression.outputs.regression == 'true'
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: ${{secrets.MAIL_SERVER}}
+        server_port: ${{secrets.MAIL_PORT}}
+        username: ${{secrets.MAIL_USERNAME}}
+        password: ${{secrets.MAIL_PASSWORD}}
+        subject: 🚨 Performance Regression Detected in Algorithm Repository
+        body: |
+          Performance regression was detected in the latest commit!
+          
+          Repository: ${{ github.repository }}
+          Commit: ${{ github.sha }}
+          
+          Please check the GitHub Action run for details:
+          https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          
+          The benchmark results have been attached to the GitHub Action run as artifacts.
+        to: ${{secrets.NOTIFICATION_EMAIL}}
+        from: GitHub Actions
+        
+    # Slack notification (requires setting up a Slack webhook)
+    - name: Send Slack notification on regression
+      if: steps.check-regression.outputs.regression == 'true'
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_CHANNEL: algorithm-benchmarks
+        SLACK_TITLE: Performance Regression Detected
+        SLACK_MESSAGE: |
+          Performance regression detected in the algorithm repository!
+          
+          Repository: ${{ github.repository }}
+          Commit: ${{ github.sha }}
+          
+          Check the GitHub Action run for details:
+          https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        SLACK_COLOR: danger
+        
+    # Create GitHub issue for significant regressions
+    - name: Create GitHub issue for regression
+      if: steps.check-regression.outputs.regression == 'true'
+      uses: JasonEtco/create-an-issue@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        filename: .github/REGRESSION_ISSUE_TEMPLATE.md
+        update_existing: true
+        search_existing: open

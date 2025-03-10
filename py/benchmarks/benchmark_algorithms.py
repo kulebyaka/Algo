@@ -14,16 +14,16 @@ import numpy as np
 import os
 import sys
 
-# Add the src directory to the path
+# Add the py directory to the path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Import original and improved implementations
-from src._15_three_sum import Solution as OriginalThreeSum, Solution2 as OriginalThreeSumTwo
-from src._146_LRU_cache import LRUCache as OriginalLRUCache
-from src._3_longest_substr_no_repeating_characters import Solution1 as OriginalLongestSubstr1
-from src._3_longest_substr_no_repeating_characters import Solution2 as OriginalLongestSubstr2
-from src._200_islands_number import Solution as OriginalIslands
-from src._33_search_in_rotated_sorted_array import Solution as OriginalRotatedSearch
+from py._15_three_sum import Solution as OriginalThreeSum, Solution2 as OriginalThreeSumTwo
+from py._146_LRU_cache import LRUCache as OriginalLRUCache
+from py._3_longest_substr_no_repeating_characters import Solution1 as OriginalLongestSubstr1
+from py._3_longest_substr_no_repeating_characters import Solution2 as OriginalLongestSubstr2
+from py._200_islands_number import Solution as OriginalIslands
+from py._33_search_in_rotated_sorted_array import Solution as OriginalRotatedSearch
 
 
 class AlgorithmBenchmark:

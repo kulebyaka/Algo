@@ -1,5 +1,5 @@
 import pytest
-from src._146_LRU_cache import LRUCache
+from py._146_LRU_cache import LRUCache
 
 class TestLRUCache:
     def test_lru_cache_basic_operations(self):

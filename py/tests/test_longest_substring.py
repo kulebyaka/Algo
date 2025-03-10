@@ -1,5 +1,5 @@
 import pytest
-from src._3_longest_substr_no_repeating_characters import Solution2
+from py._3_longest_substr_no_repeating_characters import Solution2
 
 class TestLongestSubstring:
     @pytest.mark.parametrize(

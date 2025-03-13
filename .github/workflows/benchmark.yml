@@ -49,7 +49,7 @@ jobs:
         name: Algorithm Performance Benchmarks
         tool: 'customBiggerIsBetter'
         output-file-path: benchmark-results/benchmark_summary.json
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.ACTIONS_TOKEN }}
         auto-push: true
         # Alert threshold:
         alert-threshold: '150%'
@@ -73,7 +73,7 @@ jobs:
       if: steps.check-regression.outputs.regression == 'true'
       uses: JasonEtco/create-an-issue@v2
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ACTIONS_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
       with:
         filename: .github/REGRESSION_ISSUE_TEMPLATE.md
         update_existing: true

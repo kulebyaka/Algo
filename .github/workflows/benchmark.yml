@@ -67,48 +67,7 @@ jobs:
         else
           echo "regression=false" >> $GITHUB_OUTPUT
         fi
-        
-    # Send email notification if regression is detected  
-    - name: Send email notification
-      if: steps.check-regression.outputs.regression == 'true'
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: ${{secrets.MAIL_SERVER}}
-        server_port: ${{secrets.MAIL_PORT}}
-        username: ${{secrets.MAIL_USERNAME}}
-        password: ${{secrets.MAIL_PASSWORD}}
-        subject: 🚨 Performance Regression Detected in Algorithm Repository
-        body: |
-          Performance regression was detected in the latest commit!
-          
-          Repository: ${{ github.repository }}
-          Commit: ${{ github.sha }}
-          
-          Please check the GitHub Action run for details:
-          https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          
-          The benchmark results have been attached to the GitHub Action run as artifacts.
-        to: ${{secrets.NOTIFICATION_EMAIL}}
-        from: GitHub Actions
-        
-    # Slack notification (requires setting up a Slack webhook)
-    - name: Send Slack notification on regression
-      if: steps.check-regression.outputs.regression == 'true'
-      uses: rtCamp/action-slack-notify@v2
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_CHANNEL: algorithm-benchmarks
-        SLACK_TITLE: Performance Regression Detected
-        SLACK_MESSAGE: |
-          Performance regression detected in the algorithm repository!
-          
-          Repository: ${{ github.repository }}
-          Commit: ${{ github.sha }}
-          
-          Check the GitHub Action run for details:
-          https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        SLACK_COLOR: danger
-        
+
     # Create GitHub issue for significant regressions
     - name: Create GitHub issue for regression
       if: steps.check-regression.outputs.regression == 'true'

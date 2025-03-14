@@ -6,17 +6,13 @@ This repository contains solutions to various algorithm problems from LeetCode a
 
 ```
 algo-problems/
-├── src/                     # Algorithm implementations
-├── tests/                   # Test directory
-│   ├── test_algorithms.py   # Main test suite
-│   ├── test_lru_cache.py    # LRU Cache specific tests
-│   └── ...                  # Other specific tests
-├── benchmarks/              # Performance benchmarking tools
-│   └── benchmark_algorithms.py  # Benchmarking utilities
+├── py/                      # Python algorithm implementations
+│   ├── benchmarks/          # Performance benchmarking tools
+│   ├── tests/               # Test directory
+│   └── _*.py                # Individual algorithm solutions
 ├── .github/                 # GitHub Actions workflows
 │   └── workflows/           # CI/CD configuration
 ├── requirements.txt         # Project dependencies
-└── setup.py                 # Package setup
 ```
 
 ## Running Tests
@@ -24,19 +20,22 @@ algo-problems/
 To run all tests:
 
 ```bash
+cd py
 pytest tests/
 ```
 
 To run a specific test file:
 
 ```bash
+cd py
 pytest tests/test_lru_cache.py
 ```
 
 To run with coverage report:
 
 ```bash
-pytest --cov=py tests/
+cd py
+pytest --cov=. tests/
 ```
 
 ## Benchmarking
@@ -46,12 +45,14 @@ The repository includes tools for benchmarking algorithm performance.
 To run all benchmarks:
 
 ```bash
+cd py
 python -m benchmarks.benchmark_algorithms all
 ```
 
 To benchmark a specific algorithm:
 
 ```bash
+cd py
 python -m benchmarks.benchmark_algorithms three_sum
 ```
 
@@ -86,6 +87,30 @@ To view performance trends, check the GitHub Pages site after setup:
 https://[username].github.io/[repository]/dev/bench/
 ```
 
+### Notifications
+
+When performance regressions are detected, the system:
+
+1. **Creates a GitHub Issue** with detailed information about the regression
+2. **Sends a webhook notification** to a Make.com integration
+3. **Comments on the PR** if the regression was introduced in a pull request
+
+The webhook sends the following data to Make.com:
+```json
+{
+  "type": "performance_regression",
+  "repository": "username/repo",
+  "commit": "commit-sha",
+  "workflow_run_id": "run-id",
+  "workflow_run_url": "url-to-github-action",
+  "detected_at": "timestamp",
+  "branch": "branch-name",
+  "action_url": "url-to-action"
+}
+```
+
+You can use this webhook data in Make.com to trigger various automations like sending emails, Slack messages, creating tickets in project management tools, etc.
+
 ## Algorithms Implemented
 
 - LRU Cache (146)
@@ -99,11 +124,3 @@ https://[username].github.io/[repository]/dev/bench/
 - Group Anagrams (49)
 - Spiral Matrix (54)
 - Longest Palindromic Substring (5)
-
-## Installation
-
-```bash
-pip install -e .
-```
-
-This will install the package in development mode.

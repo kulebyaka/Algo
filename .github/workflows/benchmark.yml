@@ -28,14 +28,20 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install -e .
+        pip install matplotlib numpy
         
     - name: Run benchmarks
       run: |
         mkdir -p benchmark-results
+        cd py
         python -m benchmarks.benchmark_algorithms all
-        mv *.png benchmark-results/ 2>/dev/null || true
+        cd ..
+        
+    - name: Collect results
+      run: |
+        mkdir -p benchmark-results
+        cp -r py/benchmark-results/* benchmark-results/ || true
+        find py -name "*.png" -exec cp {} benchmark-results/ \; || true
         
     - name: Upload benchmark results
       uses: actions/upload-artifact@v4
@@ -49,7 +55,7 @@ jobs:
         name: Algorithm Performance Benchmarks
         tool: 'customBiggerIsBetter'
         output-file-path: benchmark-results/benchmark_summary.json
-        github-token: ${{ secrets.ACTIONS_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         auto-push: true
         # Alert threshold:
         alert-threshold: '150%'
@@ -67,13 +73,32 @@ jobs:
         else
           echo "regression=false" >> $GITHUB_OUTPUT
         fi
-
+        
+    # Send webhook notification if regression is detected
+    - name: Send webhook notification on regression
+      if: steps.check-regression.outputs.regression == 'true'
+      uses: distributhor/workflow-webhook@v3
+      with:
+        webhook_url: https://hook.eu1.make.com/e9doz82ahpj1enf8hlujb0eh5nxeoaps
+        webhook_secret: ${{ secrets.WEBHOOK_SECRET || '' }}
+        data: >
+          {
+            "type": "performance_regression",
+            "repository": "${{ github.repository }}",
+            "commit": "${{ github.sha }}",
+            "workflow_run_id": "${{ github.run_id }}",
+            "workflow_run_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+            "detected_at": "${{ github.event.repository.updated_at }}",
+            "branch": "${{ github.ref_name }}",
+            "action_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }
+        
     # Create GitHub issue for significant regressions
     - name: Create GitHub issue for regression
       if: steps.check-regression.outputs.regression == 'true'
       uses: JasonEtco/create-an-issue@v2
       env:
-        ACTIONS_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         filename: .github/REGRESSION_ISSUE_TEMPLATE.md
         update_existing: true

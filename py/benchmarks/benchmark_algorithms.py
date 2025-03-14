@@ -17,14 +17,14 @@ import json
 from pathlib import Path
 import copy
 
-# Import summary generator
-from py.benchmarks.summary_generator import (save_benchmark_summary, 
-                                          save_github_action_output)
+# Import summary generator - using relative import
+from benchmarks.summary_generator import (save_benchmark_summary, 
+                                         save_github_action_output)
 
 # Add the py directory to the path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Import original and improved implementations
+# Import original implementations - using direct imports without the py. prefix
 from py._15_three_sum import Solution as OriginalThreeSum, Solution2 as OriginalThreeSumTwo
 from py._146_LRU_cache import LRUCache as OriginalLRUCache
 from py._3_longest_substr_no_repeating_characters import Solution1 as OriginalLongestSubstr1

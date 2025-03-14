@@ -31,6 +31,11 @@ jobs:
         # Only install the packages needed for benchmarking
         pip install matplotlib numpy pytest pytest-cov
         
+    - name: Create Python package structure
+      run: |
+        # Create an empty __init__.py file to make py directory a package
+        touch py/__init__.py
+        
     - name: Ensure benchmark directory exists
       run: |
         mkdir -p benchmark-results
@@ -38,10 +43,14 @@ jobs:
         
     - name: Run benchmarks
       run: |
-        # Change to py directory to run the benchmarks
+        # Change to the root directory
+        cd $GITHUB_WORKSPACE
+        
+        # Add the current directory to PYTHONPATH so Python can find the modules
+        export PYTHONPATH=$PYTHONPATH:$GITHUB_WORKSPACE
+        
+        # Run the benchmark script
         cd py
-        # Make sure Python can find the local modules
-        export PYTHONPATH=$PYTHONPATH:$(pwd)
         python -m benchmarks.benchmark_algorithms all
         
     - name: Collect results
@@ -53,7 +62,7 @@ jobs:
         # Find any PNG files and copy them too
         find py -name "*.png" -exec cp {} benchmark-results/ \; 2>/dev/null || true
         # Create an empty file if no results were found (to prevent workflow failure)
-        touch benchmark-results/benchmark_summary.json
+        echo '{"benchmarks":[]}' > benchmark-results/benchmark_summary.json
         
     - name: Upload benchmark results
       uses: actions/upload-artifact@v4

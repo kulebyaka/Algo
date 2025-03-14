@@ -82,10 +82,7 @@ Performance of algorithm implementations is monitored automatically:
 3. Visualizations are generated to track trends
 4. Notifications are sent when performance regressions occur
 
-To view performance trends, check the GitHub Pages site after setup:
-```
-https://[username].github.io/[repository]/dev/bench/
-```
+[![Algorithm Performance Benchmarks](https://github.com/kulebyaka/Algo/actions/workflows/benchmark.yml/badge.svg)](https://github.com/kulebyaka/Algo/actions/workflows/benchmark.yml)
 
 ### Notifications
 

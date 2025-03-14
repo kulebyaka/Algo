@@ -100,7 +100,7 @@ jobs:
       if: steps.check-regression.outputs.regression == 'true'
       uses: distributhor/workflow-webhook@v3
       with:
-        webhook_url: https://hook.eu1.make.com/e9doz82ahpj1enf8hlujb0eh5nxeoaps
+        webhook_url: https://hook.eu1.make.com/rewf3vebmbx4q1w6r2iril729efe2xzt
         webhook_secret: ${{ secrets.WEBHOOK_SECRET || '' }}
         data: >
           {

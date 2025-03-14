@@ -18,7 +18,7 @@ from pathlib import Path
 import copy
 
 # Import summary generator - using relative import
-from benchmarks.summary_generator import (save_benchmark_summary, 
+from summary_generator import (save_benchmark_summary,
                                          save_github_action_output)
 
 # Add the py directory to the path

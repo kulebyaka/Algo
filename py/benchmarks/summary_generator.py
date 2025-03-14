@@ -81,6 +81,10 @@ def save_benchmark_summary(benchmark_results: Dict[str, Dict[int, List[float]]],
     with open(output_path, 'w') as f:
         json.dump(existing_data, f, indent=2)
     
+    # Also save the GitHub Action Benchmark formatted output
+    github_action_path = os.path.join(os.path.dirname(output_path), "github_action_benchmark.json")
+    save_github_action_output(benchmark_results, benchmark_name, github_action_path)
+    
     print(f"Benchmark summary saved to {output_path}")
     
     # Check if this run shows a performance regression
@@ -92,7 +96,7 @@ def save_benchmark_summary(benchmark_results: Dict[str, Dict[int, List[float]]],
 
 
 def generate_github_action_output(benchmark_results: Dict[str, Dict[int, List[float]]],
-                                 benchmark_name: str) -> str:
+                                 benchmark_name: str) -> List[Dict[str, Any]]:
     """
     Generate output in the format expected by the GitHub Action Benchmark.
     
@@ -101,7 +105,7 @@ def generate_github_action_output(benchmark_results: Dict[str, Dict[int, List[fl
         benchmark_name: Name of the benchmark
         
     Returns:
-        JSON string for GitHub Action Benchmark
+        List of benchmark entries for GitHub Action Benchmark
     """
     action_data = []
     
@@ -121,7 +125,7 @@ def generate_github_action_output(benchmark_results: Dict[str, Dict[int, List[fl
         
         action_data.append(entry)
     
-    return json.dumps(action_data, indent=2)
+    return action_data
 
 
 def save_github_action_output(benchmark_results: Dict[str, Dict[int, List[float]]],
@@ -139,11 +143,11 @@ def save_github_action_output(benchmark_results: Dict[str, Dict[int, List[float]
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     
     # Generate GitHub Action output
-    json_str = generate_github_action_output(benchmark_results, benchmark_name)
+    action_data = generate_github_action_output(benchmark_results, benchmark_name)
     
     # Write to file
     with open(output_path, 'w') as f:
-        f.write(json_str)
+        json.dump(action_data, f, indent=2)
     
     print(f"GitHub Action output saved to {output_path}")
 

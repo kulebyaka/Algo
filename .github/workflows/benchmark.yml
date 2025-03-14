@@ -57,12 +57,22 @@ jobs:
       run: |
         # Create directory if it doesn't exist
         mkdir -p benchmark-results
+        
         # Copy benchmark results from py directory
         cp -r py/benchmark-results/* benchmark-results/ 2>/dev/null || true
+        
         # Find any PNG files and copy them too
         find py -name "*.png" -exec cp {} benchmark-results/ \; 2>/dev/null || true
-        # Create an empty file if no results were found (to prevent workflow failure)
-        echo '{"benchmarks":[]}' > benchmark-results/benchmark_summary.json
+        
+        # Create a valid benchmark file if it doesn't exist or is invalid
+        if [ ! -f benchmark-results/github_action_benchmark.json ]; then
+          echo '[]' > benchmark-results/github_action_benchmark.json
+        fi
+        
+        # Check if the file is a valid JSON array
+        if ! python -c "import json; json.load(open('benchmark-results/github_action_benchmark.json'))"; then
+          echo '[]' > benchmark-results/github_action_benchmark.json
+        fi
         
     - name: Upload benchmark results
       uses: actions/upload-artifact@v4
@@ -75,7 +85,7 @@ jobs:
       with:
         name: Algorithm Performance Benchmarks
         tool: 'customBiggerIsBetter'
-        output-file-path: benchmark-results/benchmark_summary.json
+        output-file-path: benchmark-results/github_action_benchmark.json
         github-token: ${{ secrets.GITHUB_TOKEN }}
         auto-push: true
         # Alert threshold:

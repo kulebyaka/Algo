@@ -10,16 +10,10 @@ import random
 import statistics
 import matplotlib.pyplot as plt
 from typing import List, Callable, Dict, Any, Tuple, Union
-import numpy as np
 import os
 import sys
-import json
-from pathlib import Path
 import copy
 
-# Import summary generator - using relative import
-from summary_generator import (save_benchmark_summary,
-                                         save_github_action_output)
 
 # Add the py directory to the path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -107,12 +101,6 @@ class AlgorithmBenchmark:
                 
         self.results = results
         
-        # Save benchmark summary
-        benchmark_dir = Path("../benchmark-results")
-        benchmark_dir.mkdir(exist_ok=True)
-        save_benchmark_summary(results, self.name, str(benchmark_dir / "benchmark_summary.json"))
-        save_github_action_output(results, self.name, str(benchmark_dir / "github_action_output.json"))
-        
         return results
     
     def plot_results(self, title: str = None, log_scale: bool = False, save_path: str = None):
@@ -152,11 +140,8 @@ class AlgorithmBenchmark:
         
         # Save or show plot
         if save_path:
-            benchmark_dir = Path("../benchmark-results")
-            benchmark_dir.mkdir(exist_ok=True)
-            full_path = str(benchmark_dir / save_path)
-            plt.savefig(full_path)
-            print(f"Plot saved to {full_path}")
+            plt.savefig(save_path)
+            print(f"Plot saved to {save_path}")
         else:
             plt.show()
 
@@ -346,29 +331,6 @@ def run_all_benchmarks():
     benchmark_rotated_search()
     
     print("\nAll benchmarks completed!")
-    
-    # Combine all GitHub Action outputs into one file
-    combine_github_action_outputs()
-
-
-def combine_github_action_outputs():
-    """Combine all GitHub Action outputs into a single file."""
-    benchmark_dir = Path("../benchmark-results")
-    output_file = benchmark_dir / "benchmark_summary.json"
-    combined_file = benchmark_dir / "combined_output.json"
-    
-    if output_file.exists():
-        try:
-            with open(output_file, 'r') as f:
-                data = json.load(f)
-                
-            # Write combined data
-            with open(combined_file, 'w') as f:
-                json.dump(data, f, indent=2)
-                
-            print(f"Combined benchmark data saved to {combined_file}")
-        except Exception as e:
-            print(f"Error combining benchmark outputs: {e}")
 
 
 if __name__ == "__main__":

@@ -10,8 +10,6 @@ algo-problems/
 │   ├── benchmarks/          # Performance benchmarking tools
 │   ├── tests/               # Test directory
 │   └── _*.py                # Individual algorithm solutions
-├── .github/                 # GitHub Actions workflows
-│   └── workflows/           # CI/CD configuration
 ├── requirements.txt         # Project dependencies
 ```
 
@@ -64,25 +62,6 @@ Available benchmark options:
 - `rotated_search`: Search in Rotated Sorted Array
 
 Benchmark results will be displayed in the console and saved as PNG visualizations in the benchmark-results directory.
-
-## Continuous Integration
-
-This repository uses GitHub Actions for continuous integration:
-
-- **Automated Testing**: Tests are run on every push and pull request
-- **Performance Benchmarking**: Algorithm performance is tracked over time
-- **Regression Detection**: Alerts are triggered when performance degrades
-
-### Performance Monitoring
-
-Performance of algorithm implementations is monitored automatically:
-
-1. Benchmarks run after every push to master/main
-2. Performance data is stored for historical comparison
-3. Visualizations are generated to track trends
-4. Notifications are sent when performance regressions occur
-
-[![Algorithm Performance Benchmarks](https://github.com/kulebyaka/Algo/actions/workflows/benchmark.yml/badge.svg)](https://github.com/kulebyaka/Algo/actions/workflows/benchmark.yml)
 
 ### Notifications
 

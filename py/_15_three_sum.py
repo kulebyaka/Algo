@@ -7,6 +7,10 @@ i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
 Notice that the solution set must not contain duplicate triplets.
 """
 from typing import List, Tuple
+import random
+
+# Import BenchmarkInfo for custom benchmarking
+from py.benchmarks.auto_discovery.benchmark_metadata import BenchmarkInfo
 
 
 # brute force
@@ -68,6 +72,34 @@ if __name__ == "__main__":
     main()
 
 
+# Custom input generator for Three Sum
+def generate_three_sum_input(size: int) -> List[int]:
+    """Generate random array for Three Sum algorithm with some zeros and negative numbers."""
+    # Ensure a mix of negative, zero, and positive values for interesting three sum cases
+    result = []
+    # Add some zeros (about 5%)
+    zeros_count = max(1, size // 20)
+    result.extend([0] * zeros_count)
+    
+    # Add negative and positive numbers
+    remaining = size - zeros_count
+    neg_count = remaining // 2
+    pos_count = remaining - neg_count
+    
+    # Add negative numbers
+    result.extend(random.choices(range(-size, 0), k=neg_count))
+    
+    # Add positive numbers
+    result.extend(random.choices(range(1, size), k=pos_count))
+    
+    # Shuffle the result
+    random.shuffle(result)
+    return result
 
-
-
+# Define custom benchmark info
+BENCHMARK_INFO = BenchmarkInfo(
+    input_generator=generate_three_sum_input,
+    input_sizes=[10, 50, 100, 200, 300],
+    num_runs=3,
+    name="Three Sum Optimization"
+)

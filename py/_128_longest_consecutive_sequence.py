@@ -25,5 +25,25 @@ from typing import List
 
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        # TODO: Implement solution
-        pass
+        hashset = dict()
+        max_seq = 0
+
+        for num in nums:
+            cur = hashset.get(num - 1)
+            if cur is None:
+                cur = 0
+            hashset[num] = cur + 1
+            max_seq = max(max_seq, cur + 1)
+            if cur > 0:
+                hashset.pop(num)
+
+        return max_seq
+
+def main():
+    print(Solution().longestConsecutive([100,4,200,1,3,2]))
+    print(Solution().longestConsecutive([0,3,7,2,5,8,4,6,0,1]))
+
+if __name__ == "__main__":
+    main()
+
+

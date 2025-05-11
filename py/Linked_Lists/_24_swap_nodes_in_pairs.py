@@ -32,5 +32,35 @@ class ListNode:
 
 class Solution:
     def swapPairs(self, head: ListNode) -> ListNode:
-        # TODO: Implement solution
-        pass
+        if not head or not head.next:
+            return head
+
+        dummy = ListNode(0)
+        dummy.next = head
+        prev = dummy
+
+        while head and head.next:
+            # Nodes to be swapped
+            first = head
+            second = head.next
+
+            # Swapping
+            prev.next = second
+            first.next = second.next
+            second.next = first
+
+            # Move to the next pair
+            prev = first
+            head = first.next
+
+        return dummy.next
+
+def main():
+    l1 = ListNode(2, ListNode(4 , ListNode(5, ListNode(6 , ListNode(8)))))
+    res = Solution().swapPairs(l1)
+    while res:
+        print(res.val)
+        res = res.next
+
+if __name__ == "__main__":
+    main()

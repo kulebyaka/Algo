@@ -25,6 +25,8 @@ Constraints:
 - -100 <= Node.val <= 100
 - Both list1 and list2 are sorted in non-decreasing order.
 """
+from typing import Optional
+
 
 # Definition for singly-linked list.
 class ListNode:
@@ -33,6 +35,29 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def mergeTwoLists(self, list1: ListNode, list2: ListNode) -> ListNode:
-        # TODO: Implement solution
-        pass
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        cur = dummy
+
+        while list1 and list2:
+            if list1.val < list2.val:
+                cur.next = list1
+                list1 = list1.next
+            else:
+                cur.next = list2
+                list2 = list2.next
+            cur = cur.next
+        cur.next = list1 if list1 else list2
+        return dummy.next
+
+def main():
+    l1 = ListNode(2, ListNode(4 , ListNode(7)))
+    l2 = ListNode(5, ListNode(6 , ListNode(8)))
+    res = Solution().mergeTwoLists(l1, l2)
+    while res:
+        print(res.val)
+        res = res.next
+
+if __name__ == "__main__":
+    main()
+

@@ -10,7 +10,7 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
 """
 from typing import List
 
-from py.benchmarks.auto_discovery.benchmark_metadata import BenchmarkInfo
+from py3.benchmarks.auto_discovery.benchmark_metadata import BenchmarkInfo
 
 
 class Solution:

@@ -10,7 +10,7 @@ from typing import List, Tuple
 import random
 
 # Import BenchmarkInfo for custom benchmarking
-from py.benchmarks.auto_discovery.benchmark_metadata import BenchmarkInfo
+from py3.benchmarks.auto_discovery.benchmark_metadata import BenchmarkInfo
 
 
 # brute force

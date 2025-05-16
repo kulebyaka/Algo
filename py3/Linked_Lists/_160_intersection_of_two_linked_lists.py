@@ -59,6 +59,8 @@ Constraints:
 
 Follow up: Could you write a solution that runs in O(m + n) time and use only O(1) memory?
 """
+from typing import Optional
+
 
 # Definition for singly-linked list.
 class ListNode:
@@ -66,7 +68,33 @@ class ListNode:
         self.val = x
         self.next = None
 
+""" 
+O(1) space complexity approach
+
+This approach effectively equalizes the distance traveled by both pointers:
+Imagine list A has length a + c where:
+
+a is the unique part of list A
+c is the common (intersection) part
+
+And list B has length b + c where:
+
+b is the unique part of list B
+c is the common part
+
+When the algorithm runs:
+
+Pointer one travels: a + c + b nodes
+Pointer two travels: b + c + a nodes
+
+After this distance, both pointers will be at the same position - either at the intersection point or both at null if there's no intersection.
+"""
 class Solution:
-    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
-        # TODO: Implement solution
-        pass
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        one = headA
+        two = headB
+
+        while one != two:
+            one = headB if one is None else one.next
+            two = headA if two is None else two.next
+        return one
